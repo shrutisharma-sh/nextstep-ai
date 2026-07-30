@@ -12,6 +12,8 @@ public class BackendApplication {
 	{
 		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 		SpringApplication.run(BackendApplication.class, args);
+
+		System.out.println("Working dir: " + System.getProperty("user.dir"));
 	}
 
 }
