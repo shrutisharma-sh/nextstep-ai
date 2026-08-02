@@ -11,7 +11,7 @@ class LearningResourceState(TypedDict):
     resources: str
 
 def suggest_resources(state: LearningResourceState) -> LearningResourceState:
-    # Step 1: Retrieval — get real resources from our FAISS index
+    
     retrieved = search_resources(state["skill"], top_k=3)
 
     

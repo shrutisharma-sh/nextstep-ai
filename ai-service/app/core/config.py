@@ -5,6 +5,7 @@ class Settings(BaseSettings):
     app_name: str = "NextStep AI Service"
     environment: str = "development"
     groq_api_key: str = ""
+    tavily_api_key: str = ""
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
