@@ -7,6 +7,7 @@ import com.nextstep.backend.conversation.MessageRepository;
 import com.nextstep.backend.conversation.MessageRole;
 import com.nextstep.backend.user.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
@@ -19,10 +20,15 @@ public class CareerPlannerService {
     private final MessageRepository messageRepository;
 
     public CareerPlannerResponse getCareerAdvice(String question, User user) {
+
+
+        System.out.println("Sending question: " + question);
+
         CareerPlannerRequest request = new CareerPlannerRequest(question);
 
         CareerPlannerResponse response = aiServiceRestClient.post()
                 .uri("/career-planner")
+                .contentType(MediaType.APPLICATION_JSON)
                 .body(request)
                 .retrieve()
                 .body(CareerPlannerResponse.class);
