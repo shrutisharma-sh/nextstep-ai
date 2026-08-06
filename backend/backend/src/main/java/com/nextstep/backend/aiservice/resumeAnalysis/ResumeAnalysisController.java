@@ -1,7 +1,8 @@
-package com.nextstep.backend.aiservice;
+package com.nextstep.backend.aiservice.resumeAnalysis;
 
 import com.nextstep.backend.user.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,15 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-public class CareerPlannerController {
+public class ResumeAnalysisController {
 
-    private final CareerPlannerService careerPlannerService;
+    private final ResumeAnalysisService resumeAnalysisService;
 
-    @PostMapping("/career-planner")
-    public CareerPlannerResponse careerPlanner(
-            @RequestBody CareerPlannerRequest request,
+    @PostMapping("/resume-analysis")
+    @PreAuthorize("isAuthenticated()")
+    public ResumeAnalysisResponse resumeAnalysis(
+            @RequestBody ResumeAnalysisRequest request,
             @AuthenticationPrincipal User user
     ) {
-        return careerPlannerService.getCareerAdvice(request.getQuestion(), user);
+        return resumeAnalysisService.analyzeResume(request.getResumeText(), user);
     }
 }

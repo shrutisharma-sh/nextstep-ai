@@ -1,4 +1,4 @@
-package com.nextstep.backend.aiservice;
+package com.nextstep.backend.aiservice.CareerPlanner;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

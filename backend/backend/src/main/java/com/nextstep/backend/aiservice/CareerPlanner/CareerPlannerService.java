@@ -1,4 +1,4 @@
-package com.nextstep.backend.aiservice;
+package com.nextstep.backend.aiservice.CareerPlanner;
 
 import com.nextstep.backend.conversation.Conversation;
 import com.nextstep.backend.conversation.ConversationRepository;
