@@ -3,6 +3,8 @@ from langgraph.graph import StateGraph, END
 from groq import Groq
 from tavily import TavilyClient
 from app.core.config import settings
+from langfuse import observe
+
 
 client = Groq(api_key=settings.groq_api_key)
 tavily_client = TavilyClient(api_key=settings.tavily_api_key)
@@ -11,6 +13,9 @@ class CareerPlannerState(TypedDict):
     question: str
     answer: str
 
+
+
+@observe()
 def ask_career_question(state: CareerPlannerState) -> CareerPlannerState:
     
     search_results = tavily_client.search(query=state["question"], max_results=3)
