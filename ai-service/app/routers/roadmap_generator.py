@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
 from app.agents.roadmap_generator import roadmap_generator_graph
+from app.core.langfuse_client import langfuse
 
 router = APIRouter()
 
@@ -15,4 +16,5 @@ def roadmap_generator(request: RoadmapGeneratorRequest):
         "gap_analysis": request.gap_analysis,
         "roadmap": ""
     })
+    langfuse.flush()
     return result

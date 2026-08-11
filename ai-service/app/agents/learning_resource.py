@@ -3,6 +3,7 @@ from langgraph.graph import StateGraph, END
 from groq import Groq
 from app.core.config import settings
 from app.core.faiss_index import search_resources
+from langfuse import observe
 
 client = Groq(api_key=settings.groq_api_key)
 
@@ -10,6 +11,7 @@ class LearningResourceState(TypedDict):
     skill: str
     resources: str
 
+@observe()
 def suggest_resources(state: LearningResourceState) -> LearningResourceState:
     
     retrieved = search_resources(state["skill"], top_k=3)

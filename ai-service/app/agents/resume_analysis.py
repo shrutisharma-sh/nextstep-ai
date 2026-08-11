@@ -2,14 +2,16 @@ from typing import TypedDict
 from langgraph.graph import StateGraph, END
 from groq import Groq
 from app.core.config import settings
+from langfuse import observe
 
 client = Groq(api_key=settings.groq_api_key)
 
-# Data flowing through this flowchart: resume text in, feedback out
+
 class ResumeAnalysisState(TypedDict):
     resume_text: str
     feedback: str
 
+@observe()
 def analyze_resume(state: ResumeAnalysisState) -> ResumeAnalysisState:
     prompt = f"""You are a career coach reviewing a resume.
 Give clear, actionable feedback on strengths and weaknesses.

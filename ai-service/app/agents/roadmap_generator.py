@@ -2,6 +2,7 @@ from typing import TypedDict
 from langgraph.graph import StateGraph, END
 from groq import Groq
 from app.core.config import settings
+from langfuse import observe
 
 client = Groq(api_key=settings.groq_api_key)
 
@@ -11,6 +12,7 @@ class RoadmapGeneratorState(TypedDict):
     gap_analysis: str
     roadmap: str
 
+@observe()
 def generate_roadmap(state: RoadmapGeneratorState) -> RoadmapGeneratorState:
     prompt = f"""You are a career coach. Based on the skill gaps below, create a
 step-by-step learning roadmap for someone aiming to become a {state['target_role']}.

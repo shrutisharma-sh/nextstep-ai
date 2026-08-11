@@ -2,6 +2,7 @@ from typing import TypedDict
 from langgraph.graph import StateGraph, END
 from groq import Groq
 from app.core.config import settings
+from langfuse import observe
 
 client = Groq(api_key=settings.groq_api_key)
 
@@ -11,6 +12,7 @@ class SkillGapState(TypedDict):
     target_role: str
     gap_analysis: str
 
+@observe()
 def analyze_skill_gap(state: SkillGapState) -> SkillGapState:
     prompt = f"""You are a career coach. Compare the person's current skills
 against what's typically required for their target role. List the missing

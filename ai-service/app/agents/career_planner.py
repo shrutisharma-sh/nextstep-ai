@@ -9,6 +9,8 @@ from langfuse import observe
 client = Groq(api_key=settings.groq_api_key)
 tavily_client = TavilyClient(api_key=settings.tavily_api_key)
 
+print("TAVILY KEY LOADED:", repr(settings.tavily_api_key))
+
 class CareerPlannerState(TypedDict):
     question: str
     answer: str

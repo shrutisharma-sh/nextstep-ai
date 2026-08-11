@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
 from app.agents.skill_gap import skill_gap_graph
+from app.core.langfuse_client import langfuse
 
 router = APIRouter()
 
@@ -15,4 +16,5 @@ def skill_gap(request: SkillGapRequest):
         "target_role": request.target_role,
         "gap_analysis": ""
     })
+    langfuse.flush()
     return result

@@ -1,8 +1,11 @@
-from langfuse import Langfuse
-from app.core.config import settings
+from langfuse import get_client
+from dotenv import load_dotenv
 
-langfuse = Langfuse(
-    secret_key=settings.langfuse_secret_key,
-    public_key=settings.langfuse_public_key,
-    host=settings.langfuse_host,
-)
+load_dotenv()
+
+langfuse = get_client()
+
+if langfuse.auth_check():
+    print("LANGFUSE: connected successfully")
+else:
+    print("LANGFUSE: authentication FAILED - check keys/host")
