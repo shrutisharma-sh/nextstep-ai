@@ -13,6 +13,14 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
+      <div
+        className="pointer-events-none fixed inset-0 z-40"
+        style={{
+          background:
+            'radial-gradient(ellipse at center, transparent 40%, rgba(5,5,12,0.5) 100%)',
+          mixBlendMode: 'multiply',
+        }}
+      />
       
       <Routes>
         <Route path="/" element={<HomePage />} />
