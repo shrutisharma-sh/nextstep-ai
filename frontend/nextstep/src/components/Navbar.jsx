@@ -90,7 +90,7 @@ export default function Navbar() {
 
       {/* logo Ss */}
       <Link to="/" className="font-display text-lg font-semibold tracking-wide bg-gradient-to-r from-purple to-blue bg-clip-text text-transparent">
-        NS
+        SS
       </Link>
     </nav>
   )
