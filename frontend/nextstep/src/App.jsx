@@ -11,7 +11,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 
 function AppLayout() {
   const location = useLocation()
-  const hideNavbar = ['/login', '/signup'].includes(location.pathname)
+  const hideNavbar = ['/login', '/signup','/career-planner'].includes(location.pathname)
 
   return (
     <>
