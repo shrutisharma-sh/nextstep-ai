@@ -15,8 +15,8 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-void">
-  <div className="relative w-full aspect-[3/2]">
+    <div className="h-screen overflow-hidden flex items-center justify-center bg-void">
+  <div className="relative h-full w-auto aspect-[3/2] max-w-full">
         <img
           src={loginBg}
           alt=""

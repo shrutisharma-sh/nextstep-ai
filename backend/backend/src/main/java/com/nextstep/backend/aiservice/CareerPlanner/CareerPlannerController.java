@@ -1,7 +1,10 @@
 package com.nextstep.backend.aiservice.CareerPlanner;
 
+import com.nextstep.backend.aiservice.careerInsights.CareerInsightsRequest;
+import com.nextstep.backend.aiservice.careerInsights.CareerInsightsResponse;
 import com.nextstep.backend.user.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,5 +24,11 @@ public class CareerPlannerController {
             @AuthenticationPrincipal User user
     ) {
         return careerPlannerService.getCareerAdvice(request.getQuestion(), user);
+    }
+
+    @PostMapping("/career-insights")
+    public ResponseEntity<CareerInsightsResponse> careerInsights(@RequestBody CareerInsightsRequest request) {
+        CareerInsightsResponse response = careerPlannerService.getCareerInsights(request);
+        return ResponseEntity.ok(response);
     }
 }

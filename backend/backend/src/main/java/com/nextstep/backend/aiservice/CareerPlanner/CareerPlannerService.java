@@ -1,5 +1,7 @@
 package com.nextstep.backend.aiservice.CareerPlanner;
 
+import com.nextstep.backend.aiservice.careerInsights.CareerInsightsRequest;
+import com.nextstep.backend.aiservice.careerInsights.CareerInsightsResponse;
 import com.nextstep.backend.conversation.Conversation;
 import com.nextstep.backend.conversation.ConversationRepository;
 import com.nextstep.backend.conversation.Message;
@@ -57,5 +59,14 @@ public class CareerPlannerService {
         assistantMessage.setRole(MessageRole.ASSISTANT);
         assistantMessage.setContent(answer);
         messageRepository.save(assistantMessage);
+    }
+
+    public CareerInsightsResponse getCareerInsights(CareerInsightsRequest request) {
+        return aiServiceRestClient.post()
+                .uri("/career-insights")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(request)
+                .retrieve()
+                .body(CareerInsightsResponse.class);
     }
 }
