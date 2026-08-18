@@ -2,16 +2,14 @@ package com.nextstep.backend.aiservice.CareerPlanner;
 
 import com.nextstep.backend.aiservice.careerInsights.CareerInsightsRequest;
 import com.nextstep.backend.aiservice.careerInsights.CareerInsightsResponse;
-import com.nextstep.backend.conversation.Conversation;
-import com.nextstep.backend.conversation.ConversationRepository;
-import com.nextstep.backend.conversation.Message;
-import com.nextstep.backend.conversation.MessageRepository;
-import com.nextstep.backend.conversation.MessageRole;
+import com.nextstep.backend.conversation.*;
 import com.nextstep.backend.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -68,5 +66,11 @@ public class CareerPlannerService {
                 .body(request)
                 .retrieve()
                 .body(CareerInsightsResponse.class);
+    }
+    public List<ConversationSummaryResponse> getRecentConversations(User user) {
+        return conversationRepository.findByUserIdOrderByUpdatedAtDesc(user.getId())
+                .stream()
+                .map(c -> new ConversationSummaryResponse(c.getId(), c.getTitle(), c.getUpdatedAt()))
+                .toList();
     }
 }
