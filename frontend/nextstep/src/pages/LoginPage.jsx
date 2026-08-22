@@ -17,24 +17,32 @@ export default function LoginPage() {
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError('')
-    setLoading(true)
+  e.preventDefault()
+  setError('')
+  setLoading(true)
 
-    try {
-      const res = await loginApi({ email, password })
-      login(res.data.token, res.data.user)
-      navigate('/')
-    } catch (err) {
-      console.error(err)
-      setError(
-        err.response?.data?.message || 'Invalid email or password. Please try again.'
-      )
-    } finally {
-      setLoading(false)
+  try {
+    const res = await loginApi({ email, password })
+    const { accessToken, email: userEmail, fullName, role } = res.data
+
+    const user = {
+      email: userEmail,
+      fullName,
+      firstName: fullName?.trim().split(' ')[0] || 'User',
+      role,
     }
 
+    login(accessToken, user)
+    navigate('/')
+  } catch (err) {
+    console.error(err)
+    setError(
+      err.response?.data?.message || 'Invalid email or password. Please try again.'
+    )
+  } finally {
+    setLoading(false)
   }
+}
 
   return (
     <div className="h-screen overflow-hidden flex items-center justify-center bg-void">
