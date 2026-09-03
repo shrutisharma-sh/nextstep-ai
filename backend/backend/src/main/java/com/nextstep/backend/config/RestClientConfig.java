@@ -19,7 +19,7 @@ public class RestClientConfig {
         JdkClientHttpRequestFactory requestFactory = new JdkClientHttpRequestFactory(httpClient);
 
         return RestClient.builder()
-                .baseUrl("http://localhost:8001")
+                .baseUrl(System.getenv("AI_SERVICE_URL"))
                 .requestFactory(requestFactory)
                 .build();
     }
