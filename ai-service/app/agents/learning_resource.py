@@ -31,7 +31,7 @@ Using ONLY the resources listed above (do not invent new ones), write a short
 friendly recommendation explaining which to start with and why.
 """
     response = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
+        model="openai/gpt-oss-120b",
         max_tokens=400,
         messages=[
             {"role": "user", "content": prompt}
